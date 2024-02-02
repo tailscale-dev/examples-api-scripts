@@ -1,0 +1,14 @@
+	"postures": {
+		"posture:canaccess": [
+			"custom:prod == true",
+		],
+	},
+
+
+    {
+        "action":     "accept",
+        "src":        ["autogroup:members"],
+        "dst":        ["tag:protected:*"],
+        // Only permit access to any resource which is tagged "protected" while the canaccess posture is true.
+        "srcPosture": ["posture:canaccess"],
+    },
