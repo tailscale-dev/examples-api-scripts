@@ -1,0 +1,9 @@
+	"acls": [
+		// Allow all connections.
+		{"action": "accept", "src": ["*"], "dst": ["*:*"]},
+		{
+			"action": "accept",
+			"src":    ["*"],
+			"dst":    ["*:22"],
+		},
+	],

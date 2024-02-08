@@ -1,0 +1,10 @@
+	"nodeAttrs": [
+		{
+			"target": ["*"],
+			"attr":   ["mullvad"],
+		},
+		{
+			"target": ["*"],
+			"attr":   ["funnel"],
+		},
+	],

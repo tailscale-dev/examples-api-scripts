@@ -1,0 +1,6 @@
+	"autoApprovers": {
+		"routes": {
+			"0.0.0.0/0": ["jay-macbook@passkey"],
+		},
+		"exitNode": ["tag:servers"],
+	},

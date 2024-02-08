@@ -1,0 +1,6 @@
+	"tagOwners": {
+		"tag:servers":    ["autogroup:admin"],
+		"tag:can-funnel": ["autogroup:admin"],
+		"tag:nothing":    ["autogroup:admin"],
+		"tag:working":	["autogroup:admin"],
+	},

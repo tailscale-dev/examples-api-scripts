@@ -1,0 +1,44 @@
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  acls:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      # https://tailscale.com/kb/1215/oauth-clients/#generating-long-lived-auth-keys
+      # https://www.aaron-powell.com/posts/2022-07-14-working-with-add-mask-and-github-actions/
+      - name: Generate API Token from OAuth App
+        run: |
+          TS_API_TOKEN=$(curl -d "client_id=${{ secrets.TS_OAUTH_CLIENT_ID }}" -d "client_secret=${{ secrets.TS_OAUTH_CLIENT_SECRET }}" \
+            "https://api.tailscale.com/api/v2/oauth/token" | jq -r '.access_token')
+          echo "::add-mask::$TS_API_TOKEN"
+          echo TS_API_TOKEN=$TS_API_TOKEN >> $GITHUB_ENV
+
+      - name: Concatenate Policy Files
+        run: bash process/assemble.sh
+
+      - name: Deploy ACL
+        if: github.event_name == 'push'
+        id: deploy-acl
+        uses: tailscale/gitops-acl-action@v1
+        with:
+          api-key: ${{ env.TS_API_TOKEN }}
+          tailnet: ${{ secrets.TS_TAILNET }}
+          action: apply
+          policy-file: policy.hujson
+
+      - name: Test ACL
+        if: github.event_name == 'pull_request'
+        id: test-acl
+        uses: tailscale/gitops-acl-action@v1
+        with:
+          api-key: ${{ env.TS_API_TOKEN}}
+          tailnet: ${{ secrets.TS_TAILNET }}
+          action: test
+          policy-file: policy.hujson
