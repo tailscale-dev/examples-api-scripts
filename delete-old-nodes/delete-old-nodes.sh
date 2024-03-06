@@ -9,7 +9,8 @@ curl -s "https://api.tailscale.com/api/v2/tailnet/$tailnet/devices" -u "$apikey:
 		if [[ $seen < $oldenough ]]
 		then
 			echo $id " was last seen " $seen " getting rid of it"
-			curl -s -X DELETE "https://api.tailscale.com/api/v2/device/$id" -u "$apikey:"
+   			### Uncomment below line to execute script. Defaults to dry run.
+			#curl -s -X DELETE "https://api.tailscale.com/api/v2/device/$id" -u "$apikey:"
 		else
 			echo $id " was last seen " $seen " keeping it"
 		fi
