@@ -1,3 +1,9 @@
+*** Note ***
+This type of workflow is probably best handled by our JIT engine and Geolocation policies now, which didn't exist when this was published. 
+https://tailscale.com/kb/1443/just-in-time-access
+https://tailscale.com/kb/1288/device-posture#examples
+
+
 Using device posture to manage access for traveling employees. 
 
 Device posture is a powerful tool to control Tailscale permissions and access to devices on your network. They extend our ACL capabilities and allow admins to use fine-grained controls that can be based on some properties on the device, or custom attributes which can be set through automation tools. 
