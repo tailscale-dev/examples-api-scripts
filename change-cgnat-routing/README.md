@@ -5,3 +5,5 @@ It will require an OAuth client with ACL:Read scope.
 To use: Define the tailnet, and the location of the OAuth client ID and Secret in the script
 
 **note** this assumes that *all* nodes in the tailnet are scoped to an IPPool. 
+
+**note** this needs to be run right after `tailscale up` or after each reboot. Changes do not persist.
